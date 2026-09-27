@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: action-messages
+  labels:
+    app: action-messages
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: action-messages
+  template:
+    metadata:
+      labels:
+        app: action-messages
+    spec:
+      containers:
+        - name: action-messages
+          image: 921876749360.dkr.ecr.us-east-1.amazonaws.com/action-messages:latest
+          ports:
+            - containerPort: 5001
+          envFrom:
+            - configMapRef:
+                name: action-messages-config
+          resources:
+            requests: { cpu: "100m", memory: "128Mi" }
+            limits:   { cpu: "250m", memory: "256Mi" }
+          livenessProbe:
+            httpGet: { path: /health, port: 5001 }
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /health, port: 5001 }
+            initialDelaySeconds: 5
+            periodSeconds: 10

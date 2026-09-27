@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techpathway-warehouse
+  labels:
+    app: techpathway-warehouse
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: techpathway-warehouse
+  template:
+    metadata:
+      labels:
+        app: techpathway-warehouse
+    spec:
+      containers:
+        - name: techpathway-warehouse
+          image: 921876749360.dkr.ecr.us-east-1.amazonaws.com/techpathway-warehouse:latest
+          ports:
+            - containerPort: 5002
+          resources:
+            requests: { cpu: "100m", memory: "128Mi" }
+            limits:   { cpu: "250m", memory: "256Mi" }
+          livenessProbe:
+            httpGet: { path: /health, port: 5002 }
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /health, port: 5002 }
+            initialDelaySeconds: 5
+            periodSeconds: 10

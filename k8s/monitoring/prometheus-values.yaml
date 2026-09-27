@@ -1,0 +1,21 @@
+prometheus:
+  prometheusSpec:
+    retention: 7d
+    resources:
+      requests: { cpu: "250m", memory: "512Mi" }
+      limits:   { cpu: "500m", memory: "1Gi" }
+
+grafana:
+  enabled: true
+  adminPassword: "TechPathway2024!"
+  service:
+    type: ClusterIP
+
+alertmanager:
+  enabled: true
+
+nodeExporter:
+  enabled: true
+
+kubeStateMetrics:
+  enabled: true

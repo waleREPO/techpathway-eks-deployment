@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: action-messages-config
+data:
+  FROM_EMAIL: "no-reply@techpathway.local"
+  FROM_NAME: "The Techpathway Team, Weekly Class"
+  ALWAYS_CC_EMAIL: "m.olujobi1@gmail.com"
+  SMTP_HOST: ""
