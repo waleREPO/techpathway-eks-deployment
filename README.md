@@ -181,7 +181,7 @@ End-to-end test:
 2. Add a product to cart, checkout, place the order
 3. Within ~3 seconds:
    - http://localhost:5002/ — the order appears in the warehouse `received` column
-   - http://localhost:5001/ — a message with a tracking number appears, CC'd to m.olujobi1@gmail.com
+   - http://localhost:5001/ — a message with a tracking number appears
 
 ---
 
